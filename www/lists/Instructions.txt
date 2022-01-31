@@ -1,0 +1,16 @@
+id	text	page	type	choices	choiceNames	reverse	placeholder	min	max	disabled	checkType	width	height	inline	randomize
+NA	"Bienvenido/a a un estudio de percepcion visual."	1	h3	NA	NA	NA	NA	NA	NA	0	NA	500px	NA	NA	0
+NA	"<p>En este experimento te vamos a pedir que mires una imagen coloreada naranja y azul y decidas que color es el <b>predominante</b>, si el <b>NARANJA</b> o el <b>AZUL</b>. <br>Por ejemplo, vas a ver una pantalla como la siguiente:<br><p>"	1	HTML	NA	NA	NA	NA	NA	NA	0	NA	500px	NA	NA	0
+NA	stim_6.png	1	img	NA	NA	NA	NA	NA	NA	0	NA	300px	NA	NA	0
+
+NA	"<p><br>Si acertás, <b>sumás 2 puntos</b>. <br>Si pasa mucho tiempo o respondés mal, <b>restás 1 punto</b>. <br>Intentá sumar la mayor cantidad de puntos respondiendo lo más rápido posible.</p>"	1	HTML	NA	NA	NA	NA	NA	NA	0	NA	500px	NA	NA	0
+NA	"<p> Luego te vamos a pedir que indiques que tanta confianza tenes en la respuesta que acabas de dar por lo que debes indicar si tenes una confianza <b>BAJA</b>, <b>MEDIA</b> o <b>ALTA<b/>.</p>"	1	HTML	NA	NA	NA	NA	NA	NA	0	NA	500px	NA	NA	0
+NA	"Se puede hacer desde el celular, tablet o computadora."	1	p	NA	NA	NA	NA	NA	NA	0	NA	500px	NA	NA	
+NA	"Para responder desde el celular, toca directamente la opcion que consideres correcta.<br>Si usas computadora, usa las flechas izquierda (NARANJA) y derecha (AZUL) del teclado:<br>"	1	HTML	NA	NA	NA	NA	NA	NA	0	NA	500px	NA	NA	0
+
+NA	keys.png	1	img	NA	NA	NA	NA	NA	NA	0	NA	300px	NA	NA	0
+NA	<br>"Para reportar tu confianza usando una computadora, usa las flechas de izquierda (BAJA), abajo (MEDIA) y derecha (ALTA) del teclado."<br>	1	HTML	NA	NA	NA	NA	NA	NA	0	NA	500px	NA	NA	0
+NA	new_keys.png	1	img	NA	NA	NA	NA	NA	NA	0	NA	175px	NA	NA	0 
+NA	"Al final te vamos a hacer algunas preguntas cortas."	1	p	NA	NA	NA	NA	NA	NA	0	NA	500px	NA	NA	0
+NA	"Toda la actividad te va a llevar aproximadamente 10 minutos."	1	p	NA	NA	NA	NA	NA	NA	0	NA	500px	NA	NA	0
+NA	"Por favor, silenciá las notificaciones de tu teléfono para evitar interrupciones."	1	p	NA	NA	NA	NA	NA	NA	0	NA	500px	NA	NA	0

@@ -1,0 +1,133 @@
+Funciones
+
+	############
+	makePageList
+	--
+	Toma dos argumentos fileName y globId
+		fileName = es una string que indica un path correspondiente a un archivo de texto (.txt) que contiene la informacion (en un formato especifico) para generar la pagina HTML
+		globId = es una string con el nombre de la id correspondiente a esa pagina (e.g. 'Instructions')
+	
+	La funcion devuelve una lista 
+	
+	############
+	fixedPage
+	
+	
+	############
+	progressBar
+	
+	
+	############
+	useShinyjs
+	
+	
+	############
+	loadScripts
+	
+	
+	############
+	mobileDetect
+	
+	
+	############
+	uiOutput
+	
+	
+	############
+	PageLayouts
+	--
+	Es un objeto reactivo (que aparece aca porque toma la forma de una funcion segun la logica de shiny) con una logica condicional que determina la generacion de paginas de acuerdo a los valores del 		elemento "page" dentro del objeto con valores reactivos currVal. Dependiendo del valor que tome page utiliza distintas funciones que generan las paginas que se van a mostrar. 
+
+	Para todas aquellas paginas basadas en texto fuera de la tarea experimental utiliza la funcion makePage pero con argumentos distintos. 
+	Para las paginas respectivas a los ITI (independientemente de si se hace durante la practica o no) utiliza la funcion itiPage pero con argumentos distintos.
+	Para la pagina con la tarea de practica utiliza la funcion trngPage.
+	Para la pagina con la tarea experimental utiliza la funcion expPage.
+	
+	############
+	makeCtrlList
+	--
+	Toma dos argumentos firstPage y globIds
+		firstPage = una string correspondiente al ID de la primera pagina
+		globIds = vector de strings con los ID de las distintas paginas (utiliza el objeto pageIDs)
+	
+	Genera un vector de strings llamado nameVec a partir de unir el vector globIDs con la string ".num"
+	Genera un objeto de valores reactivos llamado ctrlList que tiene dos elementos "page" y "proceed" teniendo el primero el argumento firstPage de la funcion y el segundo el numero 0
+	Itera segun la longitud del vector nameVec
+		En cada iteracion genera un elemento del objeto ctrlList con el nombre del elemento en nameVec correspondiente a esa iteracion y le asigna un numero 1
+	Terminado el loop genera dos nuevos elementos en ctrlList llamados "trngTrial" y "expTrial" a los cuales les asigna el numero 1
+	
+	La funcion devuelve el objeto reactivo CtrlList
+	
+	############
+	makePage
+	--
+	Toma 5 argumentos pageList, pageNumber, globId, ctrlVals, continueButton
+		pageList = una lista asignada a una variable como resultado del llamado a la funcion makePageList
+		pageNumber = elemento del objeto currVal correspondiente a la pagina que se quiere generar (ver como referencia el resultado de nameVec en la funcion makeCtrlList) el cual almacena un numero
+		globId = string con el id de la pagina que se esta generando
+		ctrlVals = objeto de valores reactivos (currVal) en base al llamado de la funcion makeCtrlList
+		continueButton = booleano, TRUE por default
+		
+	############
+	nextPage
+	--
+	Toma 5 argumentos pageId, ctrlVals, nextPageId, pageList, globId
+		pageId = string con el id de la pagina actual
+		ctrlVals = objeto de valores reactivos (currVal) en base al llamado de la funcion makeCtrlList
+		nextPageId = string con el id de la proxima pagina a mostrar
+		pageList = lista que haya resultado del llamado a la funcion makePageList
+		globId = string con el id de la pagina actual
+		
+	############
+	itiPage
+	--
+	Toma dos argumentos ctrlVals y trials
+		ctrlVals = objeto de valores reactivos (currVal) en base al llamado de la funcion makeCtrlList
+		trials = dataframe basado en el objeto trng_trials
+		
+	
+Objetos
+	
+	ntr = integer mayor que 1 pero mas chico que la cantidad de filas en el dataframe (que por default tiene 116 filas de largo segun la tarea de Dehane), determina la cantidad de trials	
+	
+	
+	list_idx = integer (generado para seleccionar la columna para utilizar del datafame exp_list_num #(No resulta util fuera de la tarea de base del script u otras que usen dataframes con la misma logica)
+	
+	
+	save_dir = string con que establece la ubicacion del guardado de los resultados en una carpeta llamada "data" que contiene 4 carpetas
+	
+	
+	lists_dir = string con el inicio del path hacia donde estan los archivos de texto (.txt) para construir las paginas HTML, se va a utilizar como argumento para la funcion makePageList en conjuncion con el nombre del archivo como una string
+	
+	
+	pageIDs = vector de strings con los IDs correspondientes a cada una de las paginas que van a aparecer durante la tarea, tanto las paginas en HTML como las correspondientes al experimento
+	
+	
+	trng_trials = dataframe con tres columnas donde las primeras dos se obtienen a partir de otro dataframe llamado trng_list
+							practica = contiene el numero que va a mostrarse en pantalla y usar para la practica segun la tarea de base del script
+							resploc.pr = contiene la respuesta correcta para ese trial (fila) segun una string de un solo caracter L/H
+							ITI = tiempo entre trials definido a partir de multiplicar por 1000 una cantidad n de numeros de una distribucion uniforme (de 0.7 a 1) siendo n igual a 								la cantidad de filas del dataframe trng_list. 
+							
+							
+	exp_trials = data.frame con tres columnas 
+							num = se selecciona una columna (segun list_idx) del dataframe exp_list_num que contiene un vector de numeros
+							truth = se selecciona una columna (segun list_idx) del dataframe exp_list_truth que contiene un vector de strings (L/H) que indican la respuesta correcta 							para cada estimulo
+							ITI = tiempo entre trials definido a partir de multiplicar por 1000 una cantidad n de numeros de una distribucion uniforme (de 0.7 a 1) siendo n igual a 								la cantidad de filas del data frame exp_list_num. 
+			
+			Asimismo se agrega un subseting donde se seleccionan unicamente ntr cantidad de filas del dataframe resultante lo que corresponde a cuantos trials de la tarea se van a correr (definido por ntr)
+			
+	
+	wid = vector de string con longitud 3 para usar como Random Id del sujeto.
+		# Modified to also join the string to a number generated from Sys.date to avoid duplication of ids
+	
+	
+	trngData = objeto reactivo para albergar los resultados de la practica, se comporta como una named list con dos elementos "time" y "resp" siendo el primero un vector de los tiempos de reaccion y el segundo un vector de las respuestas
+	
+	
+	expData = es exactamente igual a trngData pero va a albergar los datos experimentales y no del entrenamiento.
+	
+	currVal = objeto reactivo generado a partir del output de la funcion makeCtrlList
+	
+	
+	
+	

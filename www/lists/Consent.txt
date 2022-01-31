@@ -1,0 +1,4 @@
+id	text	page	type	choices	choiceNames	reverse	placeholder	min	max	disabled	checkType	width	height	inline	randomize
+NA	"Consent text here."	1	h3	NA	NA	NA	NA	NA	NA	0	NA	500px	NA	NA	0
+checkConsent	"OK"	1	checkboxInput	NA	NA	NA	NA	NA	NA	1	isTRUE	500px	NA	NA	0
+NA	"     "	1	p	NA	NA	NA	NA	NA	NA	0	NA	500px	NA	NA	0

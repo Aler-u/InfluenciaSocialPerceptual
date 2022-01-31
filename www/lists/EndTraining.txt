@@ -1,0 +1,4 @@
+id	text	page	type	choices	choiceNames	reverse	placeholder	min	max	disabled	checkType	width	height	inline	randomize
+NA	"Listo."	1	h2	NA	NA	NA	NA	NA	NA	0	NA	500px	NA	NA	0
+NA	"Termino la practica. Recorda responder con la mayor rapidez y precision que puedas."	1	p	NA	NA	NA	NA	NA	NA	0	NA	500px	NA	NA	0
+NA	"Si estás lista/o, apretá 'Continuar' y empezamos."	1	p	NA	NA	NA	NA	NA	NA	0	NA	500px	NA	NA	0

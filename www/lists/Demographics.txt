@@ -1,0 +1,6 @@
+id	text	page	type	choices	choiceNames	reverse	placeholder	min	max	disabled	checkType	width	height	inline	randomize
+NA	"Antes de terminar, contanos de vos."	1	h3	NA	NA	NA	NA	NA	NA	0	NA	500px	NA	NA	0
+age	"Edad"	1	numericInput	18	NA	NA	NA	0	100	1	is.null	500px	NA	NA	0
+sex	"Sexo"	1	radioButtons	1,2,3,4	"Femenino,Masculino,Otro,Prefiero no responder"	NA	NA	NA	NA	1	is.null	500px	NA	0	0
+edu	"Máximo nivel educativo completado"	1	radioButtons	1,2,3,4	"Primario,Secundario,Terciario,Universitario"	NA	NA	NA	NA	1	is.null	500px	NA	0	0
+

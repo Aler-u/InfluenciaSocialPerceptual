@@ -1,0 +1,13 @@
+name: app_propia
+title: app_propia
+username:
+account: aleru
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 5115684
+bundleId: 5246787
+url: https://aleru.shinyapps.io/app_propia/
+when: 1636781911.32441
+lastSyncTime: 1636781911.32444
+asMultiple: FALSE
+asStatic: FALSE
