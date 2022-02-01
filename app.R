@@ -8,14 +8,15 @@ library(shiny);library(shinyjs);library(shinyWidgets)
 # source pipeline and page layout fns
 source("helper_fns_v2.R"); source("page_fns_v2.R")
 
-# load experimental and training stimulus
+# load training stimulus
 # training stimulus consists of a 3d array with dimensions 100x100xN where the 3rd dimensions (N) corresponds to the number of training trials
-# experimental stimulus consists of a named list, each element representing a different proportion of 0s and 1s (see stimulus_construcion.R for details)
+
 training_stimuli <-  readRDS('training_stimulus.rds')
-experimental_array <- readRDS('experimental_stimulus.rds')
 
 # sets the number of epxerimental trials you want to use to test the app (must be bigger than 4)
+# The number ntr will get multiplied by p_levels (5) to account for the five different levels of difficulty
 ntr <-  5
+p_levels <- 5
 
 # set save dir (locally). You should have 4 subdirs within the save_dir: sessions, trng, exp & demog
 save_dir=paste0(getwd(),"/data/")
@@ -76,11 +77,14 @@ server = function(input, output, session) {
   # set trng and exp ITIs and color truth
   trng_trials=data.frame("ITI"=runif(4,.7,1)*1000)
   
-  exp_trials=data.frame("ITI"= runif(ntr * 3,.7,1)*1000,
-                        'color_truth' = sample(c('orange','blue'), ntr * 3, replace = TRUE),
-                        'trial_matrix' = trial_index_fun(ntr),
+  exp_trials=data.frame("ITI"= runif(ntr * p_levels,.7,1)*1000,
+                        'color_truth' = sample(c('orange','blue'), ntr * p_levels, replace = TRUE),
+                        'trial_matrix' = trial_index_fun(ntr, p_levels),
                         stringsAsFactors = FALSE
                         )
+  #load a subset of experimental stimulus given by the trial_matrix column (thus the experimental stimulus is loaded after trial_matrix has been defined)
+  ## experimental stimulus consists of a named list, each element representing a different proportion of 0s and 1s (see stimulus_construcion.R for details)
+  experimental_array <- readRDS('experimental_stimulus.rds')[,,exp_trials$trial_matrix]
   
   #Generate the first
   output$colors_matrix <- renderPlot({
@@ -143,7 +147,7 @@ server = function(input, output, session) {
           #Matrix of data for stimulus 
           experimental_array[,#all first dimension rows
                              ,#all second dimension columns
-                             exp_trials$trial_matrix[currVal$expTrial] #3rd dimension according to index in exp_trials dataframe
+                             currVal$expTrial #3rd dimension according to index in exp_trials dataframe
                              ], 
                 #Parameters to devoid plot from annotations, etc.
                 Rowv = NA, Colv = NA, labRow = '', labCol = '', 
@@ -303,12 +307,12 @@ server = function(input, output, session) {
           "sex" = input$Demog_sex
           )
         # Uncomment this to save data
-        # saveData(data.demo,  
-        #           outputDir= paste0(save_dir,"demog"),
-        #           partId = data.demo$id, suffix = "_d")
-        # 
+        saveData(data.demo,
+                  outputDir= paste0(save_dir,"demog"),
+                  partId = data.demo$id, suffix = "_d")
+
         # Compute final score for display (Correct: +2. Error/timeout: -1)
-        currVal$score = round(runif(1,ntr,ntr * 3))
+        currVal$score = round(runif(1,ntr,ntr * 5))
           
           # 2*(sum(expData$resp==as.numeric(exp_trials$truth) ) ) -
           # 1*(sum(expData$resp!=as.numeric(exp_trials$truth) ) )

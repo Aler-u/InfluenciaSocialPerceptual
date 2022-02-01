@@ -1,17 +1,31 @@
 # Use to get indexes for the matrices to use as stimuli
-trial_index_fun <- function(number_trials){
-  #Takes one argument and returns a shuffled vector of integers by sampling x elements (depending on number_trials) at random from intervals of 100 
-  #with total vector length equal to three times number_trials 
+trial_index_fun <- function(number_trials, dif_levels){
+  #Takes two arguments and returns a shuffled vector of integers by sampling x elements (depending on number_trials) at random from intervals of 100 
+  #with total vector length equal to dif_levels times number_trials 
     ##number_trials = an integer (must be less than 100) determining the amount of indexes to select and the total returned vector length
-  sample(
-    c(
-      sample(100, number_trials),
-      sample(101:200, number_trials),
-      sample(201:300, number_trials)
-    ),
-    number_trials*3
-  )
+    ##dif_levels = an integer given by the number of dificulty levels (i.e. the number of proportions)
+  
+  #Array length (number of 3rd dimension elements)
+  total_3dim <- dif_levels * 100
+  
+  #Intervals to sample from for each level of difficulty (it goes from 100 to 100)
+  sampling_intervals <- c(seq(1,total_3dim,100), total_3dim)
+  
+  #Vector to store results from the for loop
+  res <- c()
+  
+  #Iterate over each sampling interval to sample array indexes in the 3rd dimension
+  for(i in 1:(length(sampling_intervals) - 1)){
+    res <- append(
+      res,
+      sample(sampling_intervals[i]:sampling_intervals[i+1], number_trials)
+    )
+  }
+  #Shuffle the indexes in the result vector to randomize stimulus order or appearance 
+  sample(res, number_trials * dif_levels)
 }
+
+
 
 # use js script to detect device type
 mobileDetect = function(inputId, value = 0) {
