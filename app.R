@@ -15,7 +15,7 @@ training_stimuli <-  readRDS('training_stimulus.rds')
 
 # sets the number of epxerimental trials you want to use to test the app (must be bigger than 4)
 # The number ntr will get multiplied by p_levels (5) to account for the five different levels of difficulty
-ntr <-  5
+ntr <-  2
 p_levels <- 5
 
 # set save dir (locally). You should have 4 subdirs within the save_dir: sessions, trng, exp & demog
@@ -272,9 +272,11 @@ server = function(input, output, session) {
           
           "num" = exp_trials$trial_matrix, # indice de la matrix usada 
           "truth" = exp_trials$color_truth, #color ground truth (ie. correct answer)
-          "ITI" = exp_trials$ITI #Iti
+          "ITI" = exp_trials$ITI #ITI
         )
+        
         data.session=list(reactiveValuesToList(session$clientData),input$osbrow)
+
         
        # Uncomment this to save data
         saveData(data.session,
@@ -311,7 +313,7 @@ server = function(input, output, session) {
                   outputDir= paste0(save_dir,"demog"),
                   partId = data.demo$id, suffix = "_d")
 
-        # Compute final score for display (Correct: +2. Error/timeout: -1)
+        # Compute random score for display (Correct: +2. Error/timeout: -1)
         currVal$score = round(runif(1,ntr,ntr * 5))
           
           # 2*(sum(expData$resp==as.numeric(exp_trials$truth) ) ) -
@@ -338,3 +340,9 @@ server = function(input, output, session) {
 
 # Create app
 shinyApp(ui = ui, server = server)
+
+
+
+
+
+

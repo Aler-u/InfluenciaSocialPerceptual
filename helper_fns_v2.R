@@ -217,11 +217,11 @@ appendExpConfValues=function (ctrlVals, input, expConf, container,
   expConf$time = c(expConf$time, input$respTime[length(input$respTime)])
   expConf$resp = c(expConf$resp, input$selected[length(input$selected)])
   ctrlVals$page = afterTrialPage
-  ctrlVals$expTrial = ctrlVals$expTrial + 1
   # if last trial
   if(ctrlVals$expTrial==nrow(container)) { 
     ctrlVals$page = afterLastTrialPage
   }
+  ctrlVals$expTrial = ctrlVals$expTrial + 1
 }
 
 saveData= function (data, partId, checkNull = TRUE, 
@@ -234,7 +234,7 @@ saveData= function (data, partId, checkNull = TRUE,
   incProgress(0.5)
   idu=round(as.numeric(Sys.time()) )
   
-  DatafileName = paste0(partId, "_" ,idu, 
+  DatafileName = paste0(partId, "_" , idu, 
                         suffix, ".csv")
   DatafilePath = file.path(outputDir, DatafileName)
   write.table(data.df, DatafilePath, row.names = FALSE, 
