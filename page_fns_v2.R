@@ -452,7 +452,7 @@ gbPage=function (pageList , pageNumber, globId = "Goodbye", ctrlVals = CurrentVa
       # show score
       HTML(paste0("Tu puntaje fue: ",
                   tags$span(style="color:blue", as.character(ctrlVals$score) ),
-                  ' de ',2*ctrlVals$expTrial,'.')) )),
+                  ' de ',ctrlVals$expTrial,'.')) )),
     tags$hr(),
     thisPage, 
     br()

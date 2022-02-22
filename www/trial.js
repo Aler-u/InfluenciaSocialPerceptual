@@ -9,7 +9,7 @@ function TRIALpr(trialNrIn){
 	clickEnabled = [1];
 
 	trialNr = [trialNrIn];
-	TO = setTimeout(timedout, 2000,trialNr);
+	TO = setTimeout(timedout, 2500,trialNr);
 	tipo = [1];	
 
 }
@@ -42,7 +42,7 @@ function TRIAL(trialNrIn){
 
 	trialNr = [trialNrIn];	
 	
-	TO = setTimeout(timedout, 2000,trialNr);
+	TO = setTimeout(timedout, 2500,trialNr);
 
 	tipo = [2];
 }
