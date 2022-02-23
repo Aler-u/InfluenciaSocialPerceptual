@@ -3,7 +3,7 @@ stim_q <- 100^2
 
 #Colors proportions based on Voss, A., Rothermund, K., & Brandtstädter, J. (2008).
 #The paper proposes 3 color proportions (45%, 47% and 49%), we add two more levels
-p <- round(seq(.45,.499, length.out =5), 3)
+p <- signif(seq(.45,.495, length.out =5),4)
 
 shuffled_vectors_fun <- function(x, vector_length = stim_q){
   #The function creates a vector with length vector_length consisting of a repetition of 1s and 0s with the proportion of 1s given by the argument
@@ -15,7 +15,11 @@ shuffled_vectors_fun <- function(x, vector_length = stim_q){
   sample( #Shuffle the repeated vector
     rep( #Repeat a vector of 1 and 0 over 100^2 times
       c(1,0), #vector of the integers used to populate the vectors
-      c(vector_length*(1-x), vector_length*x) #vector of the absolute number of 1s and 0s to populate the vectors
+      round(#We round the numbers to avoid floating point precision errors
+      c(#vector of the absolute number of 1s and 0s to populate the vectors
+        vector_length*(1-x), 
+        vector_length*x) 
+        )
     ),
     vector_length
   )
