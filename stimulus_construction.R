@@ -2,8 +2,8 @@
 stim_q <- 100^2
 
 #Colors proportions based on Voss, A., Rothermund, K., & Brandtstädter, J. (2008).
-#The paper proposes 3 color proportions (45%, 47% and 49%), we add two more levels, 43% and 41% for testing purposes
-p <- c(.41,.43,.45,.47,.49)
+#The paper proposes 3 color proportions (45%, 47% and 49%), we add two more levels
+p <- round(seq(.45,.499, length.out =5), 3)
 
 shuffled_vectors_fun <- function(x, vector_length = stim_q){
   #The function creates a vector with length vector_length consisting of a repetition of 1s and 0s with the proportion of 1s given by the argument
@@ -56,4 +56,5 @@ experimental_array <- array(
 #Save the results
 saveRDS(training_stimuli,  file = 'training_stimulus.rds', version = 2)
 saveRDS(experimental_array, file = 'experimental_stimulus.rds', version = 2)
+
 
