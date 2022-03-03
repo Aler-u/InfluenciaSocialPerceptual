@@ -1,4 +1,4 @@
-/data/sessions/*
-/data/trng/*
-/data/exp/*
+/data/sessions/*.csv
+/data/trng/*.csv
+/data/exp/*.csv
 rsconnect/
